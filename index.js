@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
+var _ = require('lodash');
 
 var app = express();
 app.set('view engine', 'ejs')
@@ -16,14 +17,9 @@ MongoClient.connect('mongodb://localhost/studentDb', function(err, database) {
   }
 })
 
-// app.get('/',function(req,res){
-// 	  res.sendFile(__dirname + '/index.html')
-// })
 
 app.get('/', function(req, res) {
   db.collection('quotes').find().toArray(function(err, result){
-  	// console.log(result)
-  	// res.send(result)
   	if(err){
   		console.log(err);
   	}else{
@@ -42,6 +38,19 @@ app.post('/quotes', (req, res) => {
     console.log('saved to database')
     res.redirect('/')
   })
+})
+
+app.get('/deleteuser/:name', function(req, res) { 
+
+	var uname = req.params.name;
+	db.collection('quotes').remove({"name":uname},function(err,result) { 
+		if(err){
+			res.send(new Error("Cannot delete"));
+		}else{
+		    res.send(result);
+
+		}
+	})
 })
 
 app.listen(3000, function(){
