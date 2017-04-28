@@ -45,6 +45,10 @@ tr:nth-child(even) {
 
     <form action="/quotes" method="POST">
 
+      <div class="form-group col-md-1">
+       <input type="text" class="form-control" placeholder="id" name="id">
+      </div>
+
       <div class="form-group col-md-5">
        <input type="text" class="form-control" placeholder="name" name="name">
       </div>
@@ -53,7 +57,7 @@ tr:nth-child(even) {
        <input type="text" class="form-control" placeholder="quote" name="quote">
       </div>
 
-      <div class="form-group col-md-2 button-field">                   
+      <div class="form-group col-md-1 button-field">                   
         <button class="btn btn-block btn-primary delete-button"submit">Submit</button>
       </div> 
 
@@ -72,10 +76,10 @@ tr:nth-child(even) {
           <% for(var i=0; i<quotes.length; i++) {%>
 
             <tr>
-              <td><%= quotes[i]._id %></td>
+              <td><%= quotes[i].id %></td>
               <td><%= quotes[i].name %></td>
               <td><%= quotes[i].quote %></td>
-              <td><button class="delete-button" value=<%= quotes[i].name %>>Delete</button></td>
+              <td><button class="delete-button" value=<%= quotes[i].id %>>Delete</button></td>
             </tr>
 
           <% } %>
@@ -87,11 +91,9 @@ tr:nth-child(even) {
   <script type="text/javascript">
 
       $(".delete-button").click(function(){
-            alert($(this).val());
-            var name = $(this).val();
-            console.log(name);
+            var id = $(this).val();
             $.ajax({
-                url: "http://localhost:3000/deleteUser/" + name
+                url: "http://localhost:3000/deleteUser/" + id
               }).done(function() {
                 $( this ).addClass( "done" );
               });

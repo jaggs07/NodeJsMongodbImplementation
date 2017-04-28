@@ -39,10 +39,10 @@ app.post('/quotes', (req, res) => {
   })
 })
 
-app.get('/deleteUser/:name', function(req, res) { 
+app.get('/deleteUser/:id', function(req, res) { 
 
-	var uname = req.params.name;
-	db.collection('quotes').remove({"name":uname},function(err,result) { 
+	var uid = req.params.id;
+	db.collection('quotes').remove({"id":uid},function(err,result) { 
 		if(err){
 			res.send(new Error("Cannot delete"));
 		}
