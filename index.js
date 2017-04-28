@@ -40,7 +40,7 @@ app.post('/quotes', (req, res) => {
   })
 })
 
-app.get('/deleteuser/:name', function(req, res) { 
+app.get('/deleteUser/:name', function(req, res) { 
 
 	var uname = req.params.name;
 	db.collection('quotes').remove({"name":uname},function(err,result) { 
@@ -48,10 +48,19 @@ app.get('/deleteuser/:name', function(req, res) {
 			res.send(new Error("Cannot delete"));
 		}else{
 		    res.send(result);
-
 		}
 	})
 })
+
+app.put('/updateUser/:name', function(req, res) {
+
+    var userToUpdate = req.params.name;
+    db.collection('quotes').update({ name: 'awon'}, {$set: {name: userToUpdate}}, function (err, result) {
+        res.send(
+            (err === null) ? {msg: ''} : {msg: err}
+        );
+    });
+});
 
 app.listen(3000, function(){
 	console.log("listining on 3000 port");

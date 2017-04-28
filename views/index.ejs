@@ -1,26 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <title>MY APP</title>
+  <title>Node APP</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<script type="text/javascript"> src="index.js"</script>
+
 </head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+.page-header{
+  text-align: center;
+  font-size: 18px;
+
+}
+.well{
+  height: 100px;
+}
+</style>
+
 <body>
-  <h1 class="page-header">MongoDb Implementation using NodeJS</h1>
+<div class="well">
+    <h1 class="page-header"><strong>MongoDb Implementation using NodeJS</strong></h1>
+</div>
 
+  <div class="form-class clearfix">
 
-  <form action="/quotes" method="POST">
-    <input type="text" placeholder="name" name="name">
-    <input type="text" placeholder="quote" name="quote">
-    <button type="submit">Submit</button>
-  </form>
+    <form action="/quotes" method="POST">
 
-    <ul class="quotes">
-  <% for(var i=0; i<quotes.length; i++) {%>
-    <li class="quote">
-      <span><%= quotes[i].name %></span>
-      <span><%= quotes[i].quote %></span>
-    </li>
-  <% } %>
+      <div class="form-group col-md-5">
+       <input type="text" class="form-control" placeholder="name" name="name">
+      </div>
+
+      <div class="form-group col-md-5">
+       <input type="text" class="form-control" placeholder="quote" name="quote">
+      </div>
+
+      <div class="form-group col-md-2 button-field">                   
+        <button class="btn btn-block btn-primary delete-button"submit">Submit</button>
+      </div> 
+
+    </form>
+  </div>
+
+  <ul class="quote">
+        <table class="quotes">
+
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Quote</th>
+          </tr>
+
+          <% for(var i=0; i<quotes.length; i++) {%>
+
+            <tr>
+              <td><%= quotes[i]._id %></td>
+              <td><%= quotes[i].name %></td>
+              <td><%= quotes[i].quote %></td>
+              <td><button class="delete-button">Delete</button></td>
+            </tr>
+
+          <% } %>
+
+        </table>
+
   </ul>
 </body>
+
+
 </html>
