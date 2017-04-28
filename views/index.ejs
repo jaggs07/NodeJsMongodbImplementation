@@ -75,7 +75,7 @@ tr:nth-child(even) {
               <td><%= quotes[i]._id %></td>
               <td><%= quotes[i].name %></td>
               <td><%= quotes[i].quote %></td>
-              <td><button class="delete-button">Delete</button></td>
+              <td><button class="delete-button" value=<%= quotes[i].name %>>Delete</button></td>
             </tr>
 
           <% } %>
@@ -83,7 +83,22 @@ tr:nth-child(even) {
         </table>
 
   </ul>
-</body>
 
+  <script type="text/javascript">
+
+      $(".delete-button").click(function(){
+            alert($(this).val());
+            var name = $(this).val();
+            console.log(name);
+            $.ajax({
+                url: "http://localhost:3000/deleteUser/" + name
+              }).done(function() {
+                $( this ).addClass( "done" );
+              });
+      });
+
+</script>
+
+</body>
 
 </html>

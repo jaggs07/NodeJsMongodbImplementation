@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 MongoClient.connect('mongodb://localhost/studentDb', function(err, database) {
   if(err){
-  	consoel.log(err)
+  	console.log(err)
   }else{
   	db = database;
   }
@@ -35,7 +35,6 @@ app.post('/quotes', (req, res) => {
     	return console.log(err)
     }
 
-    console.log('saved to database')
     res.redirect('/')
   })
 })
@@ -46,9 +45,8 @@ app.get('/deleteUser/:name', function(req, res) {
 	db.collection('quotes').remove({"name":uname},function(err,result) { 
 		if(err){
 			res.send(new Error("Cannot delete"));
-		}else{
-		    res.send(result);
 		}
+		res.send(result);
 	})
 })
 
